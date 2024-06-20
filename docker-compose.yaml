@@ -13,7 +13,7 @@ services:
       - .env
 
   gateway:
-    container_name: gateway_container
+    hostname: gateway_container
     restart: always
     build: 
       context: ./gateway
@@ -27,7 +27,7 @@ services:
       - .env
       
   billing:
-    container_name: billing_container
+    hostname: billing_container
     restart: always
     build: 
       context: ./billing
@@ -43,7 +43,7 @@ services:
       - .env
 
   taylor_calc:
-    container_name: taylor_calc_container
+    hostname: taylor_calc_container
     restart: always
     build: 
       context: ./taylor_calc
