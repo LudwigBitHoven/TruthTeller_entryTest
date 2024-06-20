@@ -6,6 +6,10 @@ import json
 app = FastAPI()
 
 
+"""
+	over-simplified method to hide inner operations from
+	the end-user and create API gateway
+"""
 @app.post("/billing/trigger_calculate")
 async def user_calculate(token: str, data: dict):
 	url = f"http://billing_container/trigger_calculate?token={token}"
