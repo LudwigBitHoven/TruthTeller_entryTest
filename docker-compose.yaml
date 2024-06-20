@@ -1,0 +1,56 @@
+version: '3.4'
+services:
+  db:
+    image: postgres:14.1
+    environment:
+      - POSTGRES_DB=TruthTeller_entryTest
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+
+  gateway:
+    container_name: gateway_container
+    restart: always
+    build: 
+      context: ./gateway
+      dockerfile: Dockerfile
+      target: gateway
+    environment:
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+      
+  billing:
+    container_name: billing_container
+    restart: always
+    build: 
+      context: ./billing
+      dockerfile: Dockerfile
+      target: billing
+    depends_on:
+      - db
+    environment:
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8001:8000"
+    env_file:
+      - .env
+
+  taylor_calc:
+    container_name: taylor_calc_container
+    restart: always
+    build: 
+      context: ./taylor_calc
+      dockerfile: Dockerfile
+      target: taylor_calc
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8002:8000"
+    env_file:
+      - .env
