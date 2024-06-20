@@ -3,7 +3,6 @@ from os import environ as env
 
 
 db_url = f"postgresql://{env["POSTGRES_USER"]}:{env["POSTGRES_PASSWORD"]}@db:5432/{env["POSTGRES_DB"]}"
-# db_url = f"postgresql://{os.getenv("POSTGRES_USER")}:{os.getenv("POSTGRES_PASSWORD")}@localhost:5432/{os.getenv("POSTGRES_DB")}"
 
 engine = create_engine(db_url, echo=True)
 
