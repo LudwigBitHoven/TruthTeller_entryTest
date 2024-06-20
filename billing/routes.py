@@ -45,7 +45,7 @@ async def trigger_calculate(
         uuid = request_model.uuid
         # r = httpx.post("http://chaptykov_nikolai-lab3-1:8000/scrape", data={"x0": x0, "n": n, "rank": rank})
         data = json.dumps({"x0": x0, "n": n, "rank": rank})
-        r = httpx.post("http://127.0.0.1:8001/calculate", data=data)
+        r = httpx.post("http://taylor_calc_container/calculate", data=data)
         # check for price modifier, set price modifier
         current_month = datetime.datetime.now().date().month
         current_year = datetime.datetime.now().date().year

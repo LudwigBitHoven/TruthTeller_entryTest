@@ -8,7 +8,7 @@ app = FastAPI()
 
 @app.post("/billing/trigger_calculate")
 async def user_calculate(item_id: int, token: str, data: dict):
-	url = f"http://127.0.0.1:8000/trigger_calculate?token={token}"
+	url = f"http://billing_container/trigger_calculate?token={token}"
 	data = json.dumps(data)
 	r = httpx.post(url, data=data)
 	return r.json()
@@ -16,7 +16,7 @@ async def user_calculate(item_id: int, token: str, data: dict):
 
 @app.post("/billing/get_data")
 async def user_calculate(item_id: int, token: str, data: dict):
-	url = f"http://127.0.0.1:8000/get_data?token={token}"
+	url = f"http://billing_container/get_data?token={token}"
 	data = json.dumps(data)
 	r = httpx.post(url, data=data)
 	return r.json()
@@ -24,7 +24,7 @@ async def user_calculate(item_id: int, token: str, data: dict):
 
 @app.get("/billing/get_token")
 async def get_token():
-	url = f"http://127.0.0.1:8000/get_token"
+	url = f"http://billing_container/get_token"
 	r = httpx.get(url)
 	return r.json()
 
