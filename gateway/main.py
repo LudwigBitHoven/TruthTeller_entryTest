@@ -6,8 +6,12 @@ import json
 app = FastAPI()
 
 
+"""
+	over-simplified method to hide inner operations from
+	the end-user and create API gateway
+"""
 @app.post("/billing/trigger_calculate")
-async def user_calculate(item_id: int, token: str, data: dict):
+async def user_calculate(token: str, data: dict):
 	url = f"http://billing_container/trigger_calculate?token={token}"
 	data = json.dumps(data)
 	r = httpx.post(url, data=data)
@@ -15,7 +19,7 @@ async def user_calculate(item_id: int, token: str, data: dict):
 
 
 @app.post("/billing/get_data")
-async def user_calculate(item_id: int, token: str, data: dict, params: dict):
+async def user_calculate(token: str, data: dict, params: dict):
 	params["token"] = token
 	url = f"http://billing_container/get_data"
 	data = json.dumps(data)
